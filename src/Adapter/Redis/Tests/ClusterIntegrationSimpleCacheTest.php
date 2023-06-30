@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Redis\Tests;
 
-use Cache\IntegrationTests\SimpleCacheTest as BaseTest;
+use Tests\Cache\SimpleCacheTest as BaseTest;
 
 class ClusterIntegrationSimpleCacheTest extends BaseTest
 {

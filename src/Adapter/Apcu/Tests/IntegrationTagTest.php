@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Apcu\Tests;
 
 use Cache\Adapter\Apcu\ApcuCachePool;
-use Cache\IntegrationTests\TaggableCachePoolTest;
+use Tests\Cache\TaggableCachePoolTest;
 
 class IntegrationTagTest extends TaggableCachePoolTest
 {

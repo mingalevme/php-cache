@@ -115,7 +115,6 @@ class CacheItemTest extends TestCase
         $this->assertNull($item->getExpirationTimestamp());
 
         $item->expiresAfter(null);
-        $this->assertNull($this->getExpectedException());
 
         $item->expiresAfter(new \DateInterval('PT1S'));
         $this->assertEquals((new \DateTime('+1 second'))->getTimestamp(), $item->getExpirationTimestamp());

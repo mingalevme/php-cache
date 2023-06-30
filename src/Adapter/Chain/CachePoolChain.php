@@ -14,6 +14,7 @@ namespace Cache\Adapter\Chain;
 use Cache\Adapter\Chain\Exception\NoPoolAvailableException;
 use Cache\Adapter\Chain\Exception\PoolFailedException;
 use Cache\Adapter\Common\Exception\CachePoolException;
+use Cache\TagInterop\TaggableCacheItemInterface;
 use Cache\TagInterop\TaggableCacheItemPoolInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -61,7 +62,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem($key): TaggableCacheItemInterface
     {
         $found     = false;
         $result    = null;
@@ -98,7 +99,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = [])
+    public function getItems(array $keys = []): iterable
     {
         $hits          = [];
         $loadedItems   = [];
@@ -152,7 +153,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function hasItem($key)
+    public function hasItem($key): bool
     {
         foreach ($this->getPools() as $poolKey => $pool) {
             try {
@@ -170,7 +171,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -187,7 +188,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function deleteItem($key)
+    public function deleteItem($key): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -204,7 +205,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -221,7 +222,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function save(CacheItemInterface $item)
+    public function save(CacheItemInterface $item): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -238,7 +239,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -255,7 +256,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function commit()
+    public function commit(): bool
     {
         $result = true;
         foreach ($this->getPools() as $poolKey => $pool) {
@@ -272,7 +273,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * {@inheritdoc}
      */
-    public function invalidateTag($tag)
+    public function invalidateTag($tag): bool
     {
         return $this->invalidateTags([$tag]);
     }
@@ -309,7 +310,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
      * @param string $message
      * @param array  $context
      */
-    protected function log($level, $message, array $context = [])
+    protected function log($level, $message, array $context = []): void
     {
         if ($this->logger !== null) {
             $this->logger->log($level, $message, $context);
@@ -319,7 +320,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
     /**
      * @return array|\Psr\Cache\CacheItemPoolInterface[]
      */
-    protected function getPools()
+    protected function getPools(): array
     {
         if (empty($this->pools)) {
             throw new NoPoolAvailableException('No valid cache pool available for the chain.');
@@ -335,7 +336,7 @@ class CachePoolChain implements CacheItemPoolInterface, TaggableCacheItemPoolInt
      *
      * @throws PoolFailedException
      */
-    private function handleException($poolKey, $operation, CachePoolException $exception)
+    private function handleException($poolKey, $operation, CachePoolException $exception): void
     {
         if (!$this->options['skip_on_failure']) {
             throw $exception;

@@ -38,7 +38,7 @@ class ApcuCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         if ($this->skipIfCli()) {
             return [false, null, [], null];
@@ -49,7 +49,7 @@ class ApcuCachePool extends AbstractCachePool
         if (!$success) {
             return [false, null, [], null];
         }
-        list($data, $tags, $timestamp) = unserialize($cacheData);
+        [$data, $tags, $timestamp] = unserialize($cacheData);
 
         return [$success, $data, $tags, $timestamp];
     }
@@ -57,7 +57,7 @@ class ApcuCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         return apcu_clear_cache();
     }
@@ -65,7 +65,7 @@ class ApcuCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         apcu_delete($key);
 
@@ -75,7 +75,7 @@ class ApcuCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         if ($this->skipIfCli()) {
             return false;
@@ -97,7 +97,7 @@ class ApcuCachePool extends AbstractCachePool
      *
      * @return bool
      */
-    private function skipIfCli()
+    private function skipIfCli(): bool
     {
         return $this->skipOnCli && php_sapi_name() === 'cli';
     }
@@ -113,7 +113,7 @@ class ApcuCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    public function setDirectValue($name, $value)
+    public function setDirectValue($name, $value): void
     {
         apcu_store($name, $value);
     }

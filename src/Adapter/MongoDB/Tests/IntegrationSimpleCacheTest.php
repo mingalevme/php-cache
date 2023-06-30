@@ -12,7 +12,7 @@
 namespace Cache\Adapter\MongoDB\Tests;
 
 use Cache\Adapter\MongoDB\MongoDBCachePool;
-use Cache\IntegrationTests\SimpleCacheTest;
+use Tests\Cache\SimpleCacheTest;
 
 class IntegrationSimpleCacheTest extends SimpleCacheTest
 {

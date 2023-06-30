@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Chain\Tests;
 
 use Cache\Adapter\Chain\CachePoolChain;
-use Cache\IntegrationTests\TaggableCachePoolTest;
+use Tests\Cache\TaggableCachePoolTest;
 
 class IntegrationTagTest extends TaggableCachePoolTest
 {

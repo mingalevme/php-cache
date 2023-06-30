@@ -23,7 +23,7 @@ class VoidCachePool extends AbstractCachePool implements HierarchicalPoolInterfa
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         return [false, null, [], null];
     }
@@ -31,7 +31,7 @@ class VoidCachePool extends AbstractCachePool implements HierarchicalPoolInterfa
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         return true;
     }
@@ -39,7 +39,7 @@ class VoidCachePool extends AbstractCachePool implements HierarchicalPoolInterfa
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         return true;
     }
@@ -47,7 +47,7 @@ class VoidCachePool extends AbstractCachePool implements HierarchicalPoolInterfa
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         return true;
     }
@@ -60,12 +60,12 @@ class VoidCachePool extends AbstractCachePool implements HierarchicalPoolInterfa
         return true;
     }
 
-    protected function getList($name)
+    protected function getList($name): array
     {
         return [];
     }
 
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         return true;
     }

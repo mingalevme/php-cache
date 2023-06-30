@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Illuminate\Tests;
 
-use Cache\IntegrationTests\CachePoolTest;
+use Tests\Cache\CachePoolTest;
 
 class IntegrationPoolTest extends CachePoolTest
 {

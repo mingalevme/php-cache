@@ -11,8 +11,10 @@
 
 namespace Cache\SessionHandler\Tests;
 
+use Cache\Adapter\Common\CacheItem;
 use Cache\Adapter\PHPArray\ArrayCachePool;
 use Cache\SessionHandler\Psr6SessionHandler;
+use Cache\TagInterop\TaggableCacheItemInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -21,7 +23,7 @@ use Psr\Cache\CacheItemPoolInterface;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Daniel Bannert <d.bannert@anolilab.de>s
  */
-class Psr6SessionHandlerTest extends AbstractSessionHandlerTest
+class Psr6SessionHandlerTest extends AbstractSessionHandlerTestCase
 {
     /**
      * @type \PHPUnit_Framework_MockObject_MockObject|CacheItemPoolInterface
@@ -136,7 +138,7 @@ class Psr6SessionHandlerTest extends AbstractSessionHandlerTest
             ->willReturnSelf();
         $item->expects($this->once())
             ->method('expiresAt')
-            ->with(\DateTime::createFromFormat('U', \time() + self::TTL))
+            ->with(\DateTime::createFromFormat('U', strval(\time() + self::TTL)))
             ->willReturnSelf();
         $this->psr6->expects($this->exactly(2))
             ->method('getItem')
@@ -173,8 +175,8 @@ class Psr6SessionHandlerTest extends AbstractSessionHandlerTest
      */
     private function getItemMock()
     {
-        return $this->getMockBuilder(CacheItemInterface::class)
-            ->setMethods(['isHit', 'getKey', 'get', 'set', 'expiresAt', 'expiresAfter'])
+        return $this->getMockBuilder(TaggableCacheItemInterface::class)
+            ->setMethods(['isHit', 'getKey', 'get', 'set', 'expiresAt', 'expiresAfter', 'setTags', 'getPreviousTags'])
             ->getMock();
     }
 }

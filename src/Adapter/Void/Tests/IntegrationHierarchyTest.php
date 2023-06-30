@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Void\Tests;
 
 use Cache\Adapter\Void\VoidCachePool;
-use Cache\IntegrationTests\HierarchicalCachePoolTest;
+use Tests\Cache\HierarchicalCachePoolTest;
 
 class IntegrationHierarchyTest extends HierarchicalCachePoolTest
 {

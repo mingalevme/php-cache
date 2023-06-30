@@ -36,7 +36,7 @@ class MemcacheCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         if (false === $result = unserialize($this->cache->get($key))) {
             return [false, null, [], null];
@@ -48,7 +48,7 @@ class MemcacheCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         return $this->cache->flush();
     }
@@ -56,7 +56,7 @@ class MemcacheCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         $this->cache->delete($key);
 
@@ -66,7 +66,7 @@ class MemcacheCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         $data = serialize([true, $item->get(), $item->getTags(), $item->getExpirationTimestamp()]);
 
@@ -84,7 +84,7 @@ class MemcacheCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    public function setDirectValue($name, $value)
+    public function setDirectValue($name, $value): void
     {
         $this->cache->set($name, $value);
     }

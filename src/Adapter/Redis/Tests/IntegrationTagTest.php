@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Redis\Tests;
 
-use Cache\IntegrationTests\TaggableCachePoolTest;
+use Tests\Cache\TaggableCachePoolTest;
 
 class IntegrationTagTest extends TaggableCachePoolTest
 {

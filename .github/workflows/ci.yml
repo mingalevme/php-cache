@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1']
+        php: ['7.4', '8.0', '8.1', '8.2']
 
     services:
       redis:
@@ -21,7 +21,7 @@ jobs:
         ports:
           - 6379:6379
       redis-cluster:
-        image: grokzen/redis-cluster:5.0.4
+        image: grokzen/redis-cluster:7.0.10
         ports:
           - 7000:7000
           - 7001:7001

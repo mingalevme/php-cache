@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Void\Tests;
 
 use Cache\Adapter\Void\VoidCachePool;
-use Cache\IntegrationTests\SimpleCacheTest as BaseTest;
+use Tests\Cache\SimpleCacheTest as BaseTest;
 
 class IntegrationSimpleCacheTest extends BaseTest
 {

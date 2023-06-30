@@ -49,7 +49,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         if (false === $result = unserialize($this->cache->get($this->getHierarchyKey($key)))) {
             return [false, null, [], null];
@@ -61,7 +61,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         if ($this->cache instanceof \RedisCluster) {
             return $this->clearAllObjectsFromCacheCluster();
@@ -90,7 +90,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
      *
      * @return bool false if error
      */
-    protected function clearAllObjectsFromCacheCluster()
+    protected function clearAllObjectsFromCacheCluster(): bool
     {
         $nodes = $this->cache->_masters();
 
@@ -106,7 +106,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         $path      = null;
         $keyString = $this->getHierarchyKey($key, $path);
@@ -121,7 +121,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         $key  = $this->getHierarchyKey($item->getKey());
         $data = serialize([true, $item->get(), $item->getTags(), $item->getExpirationTimestamp()]);
@@ -143,7 +143,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function appendListItem($name, $value)
+    protected function appendListItem($name, $value): void
     {
         $this->cache->lPush($name, $value);
     }
@@ -151,7 +151,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function getList($name)
+    protected function getList($name): array
     {
         return $this->cache->lRange($name, 0, -1);
     }
@@ -159,7 +159,7 @@ class RedisCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         return $this->cache->del($name);
     }

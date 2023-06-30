@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Predis\Tests;
 
-use Cache\IntegrationTests\SimpleCacheTest;
+use Tests\Cache\SimpleCacheTest;
 
 class IntegrationSimpleCacheTest extends SimpleCacheTest
 {

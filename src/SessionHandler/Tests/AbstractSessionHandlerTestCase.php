@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Daniel Bannert <d.bannert@anolilab.de>
  */
-abstract class AbstractSessionHandlerTest extends TestCase
+abstract class AbstractSessionHandlerTestCase extends TestCase
 {
     const TTL    = 100;
     const PREFIX = 'pre';

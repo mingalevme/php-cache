@@ -11,6 +11,7 @@
 
 namespace Cache\Prefixed\Tests;
 
+use Cache\Adapter\Common\CacheItem;
 use Cache\Prefixed\PrefixedCachePool;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
@@ -35,7 +36,7 @@ class PrefixedCachePoolTest extends TestCase
     {
         $prefix      = 'ns';
         $key         = 'key';
-        $returnValue = true;
+        $returnValue = new CacheItem('test');
 
         $stub = $this->getCacheStub();
         $stub->expects($this->once())->method('getItem')->with($prefix.$key)->willReturn($returnValue);
@@ -49,7 +50,7 @@ class PrefixedCachePoolTest extends TestCase
         $prefix      = 'ns';
         $key0        = 'key0';
         $key1        = 'key1';
-        $returnValue = true;
+        $returnValue = new \ArrayIterator([]);
 
         $stub = $this->getCacheStub();
         $stub->expects($this->once())->method('getItems')->with([$prefix.$key0, $prefix.$key1])->willReturn($returnValue);

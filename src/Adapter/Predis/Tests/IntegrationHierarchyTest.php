@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Predis\Tests;
 
-use Cache\IntegrationTests\HierarchicalCachePoolTest;
+use Tests\Cache\HierarchicalCachePoolTest;
 
 class IntegrationHierarchyTest extends HierarchicalCachePoolTest
 {

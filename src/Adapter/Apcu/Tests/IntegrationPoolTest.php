@@ -12,15 +12,15 @@
 namespace Cache\Adapter\Apcu\Tests;
 
 use Cache\Adapter\Apcu\ApcuCachePool;
-use Cache\IntegrationTests\CachePoolTest as BaseTest;
+use Tests\Cache\CachePoolTest as BaseTest;
 
 class IntegrationPoolTest extends BaseTest
 {
-    protected $skippedTests = [
+    /*protected $skippedTests = [
         'testExpiration'      => 'The cache expire at the next request.',
         'testSaveExpired'     => 'The cache expire at the next request.',
         'testDeferredExpired' => 'The cache expire at the next request.',
-    ];
+    ];*/
 
     public function createCachePool()
     {

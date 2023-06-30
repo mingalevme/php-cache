@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Memcache\Tests;
 
 use Cache\Adapter\Memcache\MemcacheCachePool;
-use Cache\IntegrationTests\SimpleCacheTest;
+use Tests\Cache\SimpleCacheTest;
 use Memcache;
 
 class IntegrationSimpleCacheTest extends SimpleCacheTest

@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\PHPArray\Tests;
 
-use Cache\IntegrationTests\TaggableCachePoolTest;
+use Tests\Cache\TaggableCachePoolTest;
 
 class IntegrationTagTest extends TaggableCachePoolTest
 {

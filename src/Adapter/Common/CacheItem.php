@@ -79,7 +79,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
@@ -87,7 +87,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function set($value)
+    public function set($value): static
     {
         $this->value    = $value;
         $this->hasValue = true;
@@ -99,10 +99,10 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function get()
+    public function get(): mixed
     {
         if (!$this->isHit()) {
-            return;
+            return null;
         }
 
         return $this->value;
@@ -111,7 +111,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function isHit()
+    public function isHit(): bool
     {
         $this->initialize();
 
@@ -129,7 +129,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function getExpirationTimestamp()
+    public function getExpirationTimestamp(): ?int
     {
         return $this->expirationTimestamp;
     }
@@ -137,7 +137,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function expiresAt($expiration)
+    public function expiresAt($expiration): static
     {
         if ($expiration instanceof \DateTimeInterface) {
             $this->expirationTimestamp = $expiration->getTimestamp();
@@ -153,7 +153,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function expiresAfter($time)
+    public function expiresAfter($time): static
     {
         if ($time === null) {
             $this->expirationTimestamp = null;
@@ -173,7 +173,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function getPreviousTags()
+    public function getPreviousTags(): array
     {
         $this->initialize();
 
@@ -183,7 +183,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function getTags()
+    public function getTags(): array
     {
         return $this->tags;
     }
@@ -191,7 +191,7 @@ class CacheItem implements PhpCacheItem
     /**
      * {@inheritdoc}
      */
-    public function setTags(array $tags)
+    public function setTags(array $tags): static
     {
         $this->tags = [];
         $this->tag($tags);
@@ -204,11 +204,11 @@ class CacheItem implements PhpCacheItem
      *
      * @param string|string[] $tags A tag or array of tags
      *
+     * @return void
      * @throws InvalidArgumentException When $tag is not valid.
      *
-     * @return TaggableCacheItemInterface
      */
-    private function tag($tags)
+    private function tag($tags): void
     {
         $this->initialize();
 
@@ -231,13 +231,12 @@ class CacheItem implements PhpCacheItem
             $this->tags[$tag] = $tag;
         }
 
-        return $this;
     }
 
     /**
      * If callable is not null, execute it an populate this object with values.
      */
-    private function initialize()
+    private function initialize(): void
     {
         if ($this->callable !== null) {
             // $func will be $adapter->fetchObjectFromCache();
@@ -261,7 +260,7 @@ class CacheItem implements PhpCacheItem
      *
      * Move tags from $tags to $prevTags
      */
-    public function moveTagsToPrevious()
+    public function moveTagsToPrevious(): void
     {
         $this->prevTags = $this->tags;
         $this->tags     = [];

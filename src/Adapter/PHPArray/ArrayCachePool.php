@@ -56,9 +56,6 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
         $this->limit = $limit;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getItemWithoutGenerateCacheKey($key)
     {
         if (isset($this->deferred[$key])) {
@@ -75,7 +72,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         $keys = $this->getHierarchyKey($key);
 
@@ -96,7 +93,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         $this->cache = [];
 
@@ -106,7 +103,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         $this->commit();
         $keys = $this->getHierarchyKey($key);
@@ -120,7 +117,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         $keys   = $this->getHierarchyKey($item->getKey());
         $value  = $item->get();
@@ -158,7 +155,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function getList($name)
+    protected function getList($name): array
     {
         if (!isset($this->cache[$name])) {
             $this->cache[$name] = [];
@@ -170,7 +167,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         unset($this->cache[$name]);
 
@@ -180,7 +177,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function appendListItem($name, $key)
+    protected function appendListItem($name, $key): void
     {
         $this->cache[$name][] = $key;
     }
@@ -188,7 +185,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
     /**
      * {@inheritdoc}
      */
-    protected function removeListItem($name, $key)
+    protected function removeListItem($name, $key): void
     {
         if (isset($this->cache[$name])) {
             foreach ($this->cache[$name] as $i => $item) {
@@ -208,7 +205,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
      *
      * @return mixed
      */
-    private function cacheToolkit($keys, $value = null, $unset = false)
+    private function cacheToolkit($keys, $value = null, $unset = false): mixed
     {
         $element = &$this->cache;
 
@@ -236,7 +233,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
      *
      * @return bool
      */
-    private function cacheIsset($keys)
+    private function cacheIsset($keys): bool
     {
         $has   = false;
         $array = $this->cache;
@@ -263,7 +260,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
      *
      * @return array
      */
-    protected function getHierarchyKey($key)
+    protected function getHierarchyKey($key): array
     {
         if (!$this->isHierarchyKey($key)) {
             return [$key];

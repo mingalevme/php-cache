@@ -11,7 +11,7 @@
 
 namespace Cache\Taggable\Tests;
 
-use Cache\IntegrationTests\TaggableCachePoolTest;
+use Tests\Cache\TaggableCachePoolTest;
 use Cache\Taggable\TaggablePSR6PoolAdapter;
 use Symfony\Component\Cache\Adapter\ArrayAdapter as SymfonyArrayAdapter;
 

@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\PHPArray\Tests;
 
-use Cache\IntegrationTests\SimpleCacheTest;
+use Tests\Cache\SimpleCacheTest;
 
 class IntegrationSimpleCacheTest extends SimpleCacheTest
 {

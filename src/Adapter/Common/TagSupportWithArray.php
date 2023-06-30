@@ -51,7 +51,7 @@ trait TagSupportWithArray
     /**
      * {@inheritdoc}
      */
-    protected function getList($name)
+    protected function getList($name): array
     {
         $data = $this->getDirectValue($name);
         if (!is_array($data)) {
@@ -64,7 +64,7 @@ trait TagSupportWithArray
     /**
      * {@inheritdoc}
      */
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         $this->setDirectValue($name, []);
 

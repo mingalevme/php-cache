@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Chain\Tests;
 
 use Cache\Adapter\Chain\CachePoolChain;
-use Cache\IntegrationTests\CachePoolTest;
+use Tests\Cache\CachePoolTest;
 
 class IntegrationPoolTest extends CachePoolTest
 {

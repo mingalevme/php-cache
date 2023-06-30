@@ -18,7 +18,7 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * @author Daniel Bannert <d.bannert@anolilab.de>s
  */
-class Psr16SessionHandlerTest extends AbstractSessionHandlerTest
+class Psr16SessionHandlerTest extends AbstractSessionHandlerTestCase
 {
     /**
      * @type \PHPUnit_Framework_MockObject_MockObject|CacheInterface

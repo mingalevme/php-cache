@@ -53,7 +53,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * @param string $folder
      */
-    public function setFolder($folder)
+    public function setFolder($folder): void
     {
         $this->folder = $folder;
     }
@@ -61,7 +61,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         $empty = [false, null, [], null];
         $file  = $this->getFilePath($key);
@@ -92,7 +92,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         try {
             $this->filesystem->deleteDirectory($this->folder);
@@ -112,7 +112,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         return $this->forceClear($key);
     }
@@ -120,7 +120,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         $data = serialize(
             [
@@ -148,7 +148,7 @@ class FilesystemCachePool extends AbstractCachePool
      *
      * @return string
      */
-    private function getFilePath($key)
+    private function getFilePath($key): string
     {
         if (!preg_match('|^[a-zA-Z0-9_\.! ]+$|', $key)) {
             throw new InvalidArgumentException(sprintf('Invalid key "%s". Valid filenames must match [a-zA-Z0-9_\.! ].', $key));
@@ -160,7 +160,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function getList($name)
+    protected function getList($name): array
     {
         $file = $this->getFilePath($name);
 
@@ -174,16 +174,18 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         $file = $this->getFilePath($name);
         $this->filesystem->delete($file);
+
+        return true;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function appendListItem($name, $key)
+    protected function appendListItem($name, $key): bool
     {
         $list   = $this->getList($name);
         $list[] = $key;
@@ -200,7 +202,7 @@ class FilesystemCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function removeListItem($name, $key)
+    protected function removeListItem($name, $key): bool
     {
         $list = $this->getList($name);
         foreach ($list as $i => $item) {
@@ -223,7 +225,7 @@ class FilesystemCachePool extends AbstractCachePool
      *
      * @return bool
      */
-    private function forceClear($key)
+    private function forceClear($key): bool
     {
         try {
             $this->filesystem->delete($this->getFilePath($key));

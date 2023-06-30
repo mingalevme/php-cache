@@ -40,7 +40,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         if (false === $result = unserialize($this->cache->get($this->getHierarchyKey($key)))) {
             return [false, null, [], null];
@@ -52,7 +52,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         return 'OK' === $this->cache->flushdb()->getPayload();
     }
@@ -60,7 +60,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         $path      = null;
         $keyString = $this->getHierarchyKey($key, $path);
@@ -75,7 +75,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         if ($ttl < 0) {
             return false;
@@ -102,7 +102,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function appendListItem($name, $value)
+    protected function appendListItem($name, $value): void
     {
         $this->cache->lpush($name, $value);
     }
@@ -110,7 +110,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function getList($name)
+    protected function getList($name): array
     {
         return $this->cache->lrange($name, 0, -1);
     }
@@ -118,7 +118,7 @@ class PredisCachePool extends AbstractCachePool implements HierarchicalPoolInter
     /**
      * {@inheritdoc}
      */
-    protected function removeList($name)
+    protected function removeList($name): bool
     {
         return $this->cache->del($name);
     }

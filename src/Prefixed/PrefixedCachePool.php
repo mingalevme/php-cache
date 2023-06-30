@@ -41,7 +41,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function getItem($key)
+    public function getItem($key): CacheItemInterface
     {
         $this->prefixValue($key);
 
@@ -51,7 +51,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function getItems(array $keys = [])
+    public function getItems(array $keys = []): iterable
     {
         $this->prefixValues($keys);
 
@@ -61,7 +61,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function hasItem($key)
+    public function hasItem($key): bool
     {
         $this->prefixValue($key);
 
@@ -71,7 +71,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function clear()
+    public function clear(): bool
     {
         return $this->cachePool->clear();
     }
@@ -79,7 +79,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteItem($key)
+    public function deleteItem($key): bool
     {
         $this->prefixValue($key);
 
@@ -89,7 +89,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteItems(array $keys)
+    public function deleteItems(array $keys): bool
     {
         $this->prefixValues($keys);
 
@@ -99,7 +99,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function save(CacheItemInterface $item)
+    public function save(CacheItemInterface $item): bool
     {
         return $this->cachePool->save($item);
     }
@@ -107,7 +107,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function saveDeferred(CacheItemInterface $item)
+    public function saveDeferred(CacheItemInterface $item): bool
     {
         return $this->cachePool->saveDeferred($item);
     }
@@ -115,7 +115,7 @@ class PrefixedCachePool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      */
-    public function commit()
+    public function commit(): bool
     {
         return $this->cachePool->commit();
     }

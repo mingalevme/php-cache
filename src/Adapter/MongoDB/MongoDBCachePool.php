@@ -58,7 +58,7 @@ class MongoDBCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function fetchObjectFromCache($key)
+    protected function fetchObjectFromCache($key): array
     {
         $object = $this->collection->findOne(['_id' => $key]);
 
@@ -83,7 +83,7 @@ class MongoDBCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearAllObjectsFromCache()
+    protected function clearAllObjectsFromCache(): bool
     {
         $this->collection->deleteMany([]);
 
@@ -93,7 +93,7 @@ class MongoDBCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function clearOneObjectFromCache($key)
+    protected function clearOneObjectFromCache($key): bool
     {
         $this->collection->deleteOne(['_id' => $key]);
 
@@ -103,7 +103,7 @@ class MongoDBCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    protected function storeItemInCache(PhpCacheItem $item, $ttl)
+    protected function storeItemInCache(PhpCacheItem $item, $ttl): bool
     {
         $object = [
             '_id'                 => $item->getKey(),
@@ -137,7 +137,7 @@ class MongoDBCachePool extends AbstractCachePool
     /**
      * {@inheritdoc}
      */
-    public function setDirectValue($name, $value)
+    public function setDirectValue($name, $value): void
     {
         $object = [
             '_id'  => $name,
@@ -147,7 +147,7 @@ class MongoDBCachePool extends AbstractCachePool
         $this->collection->updateOne(['_id' => $name], ['$set' => $object], ['upsert' => true]);
     }
 
-    private function freezeValue($value)
+    private function freezeValue($value): string
     {
         return static::jsonArmor(serialize($value));
     }

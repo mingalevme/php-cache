@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\PHPArray\Tests;
 
-use Cache\IntegrationTests\HierarchicalCachePoolTest;
+use Tests\Cache\HierarchicalCachePoolTest;
 
 class IntegrationHierarchicalTest extends HierarchicalCachePoolTest
 {

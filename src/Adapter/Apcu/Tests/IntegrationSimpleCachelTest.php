@@ -12,7 +12,7 @@
 namespace Cache\Adapter\Apcu\Tests;
 
 use Cache\Adapter\Apcu\ApcuCachePool;
-use Cache\IntegrationTests\SimpleCacheTest as BaseTest;
+use Tests\Cache\SimpleCacheTest as BaseTest;
 
 class IntegrationSimpleCachelTest extends BaseTest
 {

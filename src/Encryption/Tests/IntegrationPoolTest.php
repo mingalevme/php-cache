@@ -15,9 +15,9 @@ use Cache\Adapter\Common\CacheItem;
 use Cache\Adapter\Common\Exception\InvalidArgumentException;
 use Cache\Adapter\Filesystem\FilesystemCachePool;
 use Cache\Encryption\EncryptedCachePool;
-use Cache\IntegrationTests\CachePoolTest;
+use League\Flysystem\Local\LocalFilesystemAdapter as Local;
+use Tests\Cache\CachePoolTest;
 use Defuse\Crypto\Key;
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 
 class IntegrationPoolTest extends CachePoolTest

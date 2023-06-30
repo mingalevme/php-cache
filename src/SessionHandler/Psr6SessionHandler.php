@@ -12,6 +12,7 @@
 namespace Cache\SessionHandler;
 
 use Psr\Cache\CacheItemPoolInterface;
+use ReturnTypeWillChange;
 
 /**
  * @author Aaron Scherer <aequasi@gmail.com>
@@ -61,10 +62,10 @@ class Psr6SessionHandler extends AbstractSessionHandler
     /**
      * {@inheritdoc}
      */
-    public function updateTimestamp($sessionId, $data)
+    #[ReturnTypeWillChange] public function updateTimestamp($sessionId, $data)
     {
         $item = $this->getCacheItem($sessionId);
-        $item->expiresAt(\DateTime::createFromFormat('U', \time() + $this->ttl));
+        $item->expiresAt(\DateTime::createFromFormat('U', strval(\time() + $this->ttl)));
 
         return $this->cache->save($item);
     }
@@ -116,7 +117,7 @@ class Psr6SessionHandler extends AbstractSessionHandler
      *
      * @return \Psr\Cache\CacheItemInterface
      */
-    private function getCacheItem($sessionId)
+    private function getCacheItem($sessionId): \Psr\Cache\CacheItemInterface
     {
         return $this->cache->getItem($this->prefix.$sessionId);
     }

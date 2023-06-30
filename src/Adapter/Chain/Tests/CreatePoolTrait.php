@@ -13,8 +13,8 @@ namespace Cache\Adapter\Chain\Tests;
 
 use Cache\Adapter\Filesystem\FilesystemCachePool;
 use Cache\Adapter\PHPArray\ArrayCachePool;
-use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter as Local;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>

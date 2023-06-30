@@ -11,6 +11,7 @@
 
 namespace Cache\Namespaced\Tests;
 
+use Cache\Adapter\Common\CacheItem;
 use Cache\Namespaced\NamespacedCachePool;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
@@ -36,7 +37,7 @@ class NamespacedCachePoolTest extends TestCase
     {
         $namespace   = 'ns';
         $key         = 'key';
-        $returnValue = true;
+        $returnValue = new CacheItem('test');
 
         $stub = $this->getHierarchyCacheStub();
         $stub->expects($this->once())->method('getItem')->with('|'.$namespace.'|'.$key)->willReturn($returnValue);
@@ -50,7 +51,7 @@ class NamespacedCachePoolTest extends TestCase
         $namespace   = 'ns';
         $key0        = 'key0';
         $key1        = 'key1';
-        $returnValue = true;
+        $returnValue = new \ArrayIterator([]);
 
         $stub = $this->getHierarchyCacheStub();
         $stub->expects($this->once())->method('getItems')->with(['|'.$namespace.'|'.$key0, '|'.$namespace.'|'.$key1])->willReturn($returnValue);

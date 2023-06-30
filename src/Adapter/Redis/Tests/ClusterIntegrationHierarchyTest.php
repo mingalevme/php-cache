@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Redis\Tests;
 
-use Cache\IntegrationTests\HierarchicalCachePoolTest;
+use Tests\Cache\HierarchicalCachePoolTest;
 
 class ClusterIntegrationHierarchyTest extends HierarchicalCachePoolTest
 {

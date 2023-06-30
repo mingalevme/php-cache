@@ -11,6 +11,8 @@
 
 namespace Cache\SessionHandler;
 
+use ReturnTypeWillChange;
+
 /**
  * @author Daniel Bannert <d.bannert@anolilab.de>
  *
@@ -46,7 +48,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function open($savePath, $sessionName)
+    #[ReturnTypeWillChange] public function open($savePath, $sessionName)
     {
         $this->sessionName = $sessionName;
 
@@ -56,7 +58,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function validateId($sessionId)
+    #[ReturnTypeWillChange] public function validateId($sessionId)
     {
         $this->prefetchData = $this->read($sessionId);
         $this->prefetchId   = $sessionId;
@@ -67,7 +69,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function read($sessionId)
+    #[ReturnTypeWillChange] public function read($sessionId)
     {
         if ($this->prefetchId !== null) {
             $prefetchId   = $this->prefetchId;
@@ -95,7 +97,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function write($sessionId, $data)
+    #[ReturnTypeWillChange] public function write($sessionId, $data)
     {
         if (\PHP_VERSION_ID < 70000 && $this->prefetchData) {
             $readData           = $this->prefetchData;
@@ -123,7 +125,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function destroy($sessionId)
+    #[ReturnTypeWillChange] public function destroy($sessionId)
     {
         if (\PHP_VERSION_ID < 70000) {
             $this->prefetchData = null;
@@ -135,7 +137,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function close()
+    #[ReturnTypeWillChange] public function close()
     {
         return true;
     }
@@ -143,7 +145,7 @@ abstract class AbstractSessionHandler implements \SessionHandlerInterface, \Sess
     /**
      * {@inheritdoc}
      */
-    public function gc($lifetime)
+    #[ReturnTypeWillChange] public function gc($lifetime)
     {
         // not required here because cache will auto expire the records anyhow.
         return true;

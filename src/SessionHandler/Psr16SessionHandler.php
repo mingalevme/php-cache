@@ -12,6 +12,7 @@
 namespace Cache\SessionHandler;
 
 use Psr\SimpleCache\CacheInterface;
+use ReturnTypeWillChange;
 
 /**
  * @author Daniel Bannert <d.bannert@anolilab.de>
@@ -60,7 +61,7 @@ class Psr16SessionHandler extends AbstractSessionHandler
     /**
      * {@inheritdoc}
      */
-    public function updateTimestamp($sessionId, $data)
+    #[ReturnTypeWillChange] public function updateTimestamp($sessionId, $data)
     {
         $value = $this->cache->get($this->prefix.$sessionId);
 

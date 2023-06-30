@@ -12,7 +12,7 @@
 namespace Cache\Bridge\SimpleCache\Tests;
 
 use Cache\Bridge\SimpleCache\SimpleCacheBridge;
-use Cache\IntegrationTests\SimpleCacheTest as BaseTest;
+use Tests\Cache\SimpleCacheTest as BaseTest;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class IntegrationTest extends BaseTest

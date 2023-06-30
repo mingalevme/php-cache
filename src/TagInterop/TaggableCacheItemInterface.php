@@ -28,7 +28,7 @@ interface TaggableCacheItemInterface extends CacheItemInterface
      *
      * @return array
      */
-    public function getPreviousTags();
+    public function getPreviousTags(): array;
 
     /**
      * Overwrite all tags with a new set of tags.
@@ -39,5 +39,5 @@ interface TaggableCacheItemInterface extends CacheItemInterface
      *
      * @return TaggableCacheItemInterface
      */
-    public function setTags(array $tags);
+    public function setTags(array $tags): static;
 }
