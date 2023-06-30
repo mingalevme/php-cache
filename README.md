@@ -1,3 +1,11 @@
+# mingalevme/php-cache
+
+https://github.com/php-cache/cache with:
+- psr/log: "^1.0 || ^2.0 || ^3.0"
+- psr/simple-cache: "^1.0 || ^2.0 || ^3.0"
+- psr/cache: "^1.0 || ^2.0 || ^3.0"
+- league/flysystem: "^2.0 || ^3.0"
+
 # PHP Cache
 
 [![Gitter](https://badges.gitter.im/php-cache/cache.svg)](https://gitter.im/php-cache/cache?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -5,13 +13,13 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![StyleCI](https://styleci.io/repos/50789153/shield)](https://styleci.io/repos/50789153)
 
-This is the main repository for all our cache adapters and libraries. To read about 
-features like tagging and hierarchy support please read the shared documentation at [www.php-cache.com](http://www.php-cache.com). 
+This is the main repository for all our cache adapters and libraries. To read about
+features like tagging and hierarchy support please read the shared documentation at [www.php-cache.com](http://www.php-cache.com).
 
 Back in 2016, this was the first library supporting PSR-6. We created Symfony bundles
-and made many great libraries in the PHP-cache organization. This was a few years ago 
-and the library is not activly maintained. Starting a new project one should consider 
-using the more performant and activly supported 
+and made many great libraries in the PHP-cache organization. This was a few years ago
+and the library is not activly maintained. Starting a new project one should consider
+using the more performant and activly supported
 [Symfony Cache](https://symfony.com/doc/current/components/cache.html).
 
 ### Notice
