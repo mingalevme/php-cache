@@ -15,7 +15,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@2.7.0
         with:
-          php-version: '7.4'
+          php-version: '8.2'
           coverage: none
 
       - name: Checkout code
@@ -38,7 +38,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.2'
           extensions: redis, memcached, apcu
           tools: composer:v2
 
@@ -47,10 +47,9 @@ jobs:
 
       - name: Download dependencies
         run: |
-          composer require --dev --no-update psalm/phar:3.16
+          composer require --dev --no-update vimeo/psalm
           composer update --no-interaction --prefer-dist
 
       - name: Psalm
         run: |
-          ./vendor/bin/psalm.phar --version
-          ./vendor/bin/psalm.phar --output-format=github --no-progress --show-info=false --stats
+          ./vendor/bin/psalm --output-format=github --no-progress --show-info=false --stats

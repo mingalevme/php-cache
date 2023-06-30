@@ -23,19 +23,20 @@
     "require": {
         "php": ">=7.4",
         "league/flysystem": "^2.0 || ^3.0",
+        "psr/cache": "^1.0 || ^2.0 || ^3.0",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
-        "psr/simple-cache": "^1.0 || ^2.0 || ^3.0",
-        "psr/cache": "^1.0 || ^2.0 || ^3.0"
+        "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "defuse/php-encryption": "^2.0",
-        "symfony/polyfill-php70": "^1.6",
+        "ergebnis/composer-normalize": "^2.32",
+        "illuminate/cache": "^10.0",
         "mockery/mockery": "^1.6",
+        "mongodb/mongodb": "^1.16",
+        "phpunit/phpunit": "^9.5.10",
         "predis/predis": "^2.2",
         "symfony/cache": "^6.3",
-        "illuminate/cache": "^10.0",
-        "phpunit/phpunit": "^9.5.10",
-        "mongodb/mongodb": "^1.16"
+        "symfony/polyfill-php70": "^1.6"
     },
     "replace": {
         "cache/adapter-common": "^1",
@@ -107,14 +108,15 @@
             "Tests\\Cache\\": "tests/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true,
+            "ergebnis/composer-normalize": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "kylekatarnls/update-helper": true
         }
     }
 }
