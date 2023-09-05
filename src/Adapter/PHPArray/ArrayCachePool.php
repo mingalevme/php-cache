@@ -205,7 +205,7 @@ class ArrayCachePool extends AbstractCachePool implements HierarchicalPoolInterf
      *
      * @return mixed
      */
-    private function cacheToolkit($keys, $value = null, $unset = false): mixed
+    private function cacheToolkit($keys, $value = null, $unset = false)
     {
         $element = &$this->cache;
 

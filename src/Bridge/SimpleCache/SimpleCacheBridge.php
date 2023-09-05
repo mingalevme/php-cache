@@ -40,7 +40,7 @@ class SimpleCacheBridge implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null): mixed
+    public function get($key, $default = null)
     {
         try {
             $item = $this->cacheItemPool->getItem($key);

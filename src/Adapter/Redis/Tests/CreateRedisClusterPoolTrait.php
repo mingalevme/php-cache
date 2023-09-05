@@ -24,6 +24,10 @@ trait CreateRedisClusterPoolTrait
 
     private function getClient()
     {
+        if (!getenv('IS_REDIS_CLUSTER_ENABLED')) {
+            self::markTestSkipped('Redis cluster is not enabled');
+        }
+
         if ($this->client === null) {
             $this->client = new \RedisCluster(null, ['127.0.0.1:7000', '127.0.0.1:7001', '127.0.0.1:7002']);
         }

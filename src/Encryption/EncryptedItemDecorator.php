@@ -66,7 +66,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function set($value): static
+    public function set($value): self
     {
         $type = gettype($value);
 
@@ -84,7 +84,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function get(): mixed
+    public function get()
     {
         if (!$this->isHit()) {
             return null;
@@ -106,7 +106,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAt($expiration): static
+    public function expiresAt($expiration): self
     {
         $this->cacheItem->expiresAt($expiration);
 
@@ -116,7 +116,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAfter($time): static
+    public function expiresAfter($time): self
     {
         $this->cacheItem->expiresAfter($time);
 
@@ -134,7 +134,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setTags(array $tags): static
+    public function setTags(array $tags): self
     {
         $this->cacheItem->setTags($tags);
 
@@ -156,7 +156,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
      *
      * @return mixed
      */
-    private function transform(array $item): mixed
+    private function transform(array $item)
     {
         $value = static::jsonDeArmor($item['value']);
 

@@ -39,5 +39,5 @@ interface TaggableCacheItemInterface extends CacheItemInterface
      *
      * @return TaggableCacheItemInterface
      */
-    public function setTags(array $tags): static;
+    public function setTags(array $tags): self;
 }

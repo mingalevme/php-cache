@@ -70,7 +70,7 @@ class PrefixedSimpleCache implements CacheInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null): mixed
+    public function get($key, $default = null)
     {
         $this->prefixValue($key);
 
