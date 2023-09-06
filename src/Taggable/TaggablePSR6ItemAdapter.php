@@ -85,7 +85,7 @@ class TaggablePSR6ItemAdapter implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function get()
+    public function get(): mixed
     {
         $rawItem = $this->cacheItem->get();
 
@@ -109,7 +109,7 @@ class TaggablePSR6ItemAdapter implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function set($value): self
+    public function set($value): static
     {
         $this->initializeTags();
 
@@ -142,14 +142,14 @@ class TaggablePSR6ItemAdapter implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setTags(array $tags): self
+    public function setTags(array $tags): static
     {
         $this->tags = [];
 
         return $this->tag($tags);
     }
 
-    private function tag($tags): self
+    private function tag($tags): static
     {
         if (!is_array($tags)) {
             $tags = [$tags];
@@ -181,7 +181,7 @@ class TaggablePSR6ItemAdapter implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAt($expiration): self
+    public function expiresAt($expiration): static
     {
         $this->cacheItem->expiresAt($expiration);
 
@@ -191,7 +191,7 @@ class TaggablePSR6ItemAdapter implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAfter($time): self
+    public function expiresAfter($time): static
     {
         $this->cacheItem->expiresAfter($time);
 

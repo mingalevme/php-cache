@@ -29,7 +29,10 @@ trait CreateRedisClusterPoolTrait
         }
 
         if ($this->client === null) {
-            $this->client = new \RedisCluster(null, ['127.0.0.1:7000', '127.0.0.1:7001', '127.0.0.1:7002']);
+            //$this->client = new \RedisCluster(null, ['127.0.0.1:7000', '127.0.0.1:7001', '127.0.0.1:7002']);
+            $this->client = new \RedisCluster(null, ['localhost:7000', 'localhost:7001', 'localhost:7002']);
+            $this->client->setOption(\RedisCluster::OPT_SLAVE_FAILOVER, \RedisCluster::FAILOVER_DISTRIBUTE_SLAVES);
+            $this->client->ping('PING');
         }
 
         return $this->client;

@@ -66,7 +66,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function set($value): self
+    public function set($value): static
     {
         $type = gettype($value);
 
@@ -84,7 +84,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function get()
+    public function get(): mixed
     {
         if (!$this->isHit()) {
             return null;
@@ -106,7 +106,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAt($expiration): self
+    public function expiresAt($expiration): static
     {
         $this->cacheItem->expiresAt($expiration);
 
@@ -116,7 +116,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function expiresAfter($time): self
+    public function expiresAfter($time): static
     {
         $this->cacheItem->expiresAfter($time);
 
@@ -134,7 +134,7 @@ class EncryptedItemDecorator implements TaggableCacheItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setTags(array $tags): self
+    public function setTags(array $tags): static
     {
         $this->cacheItem->setTags($tags);
 

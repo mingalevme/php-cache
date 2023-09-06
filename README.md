@@ -37,9 +37,25 @@ pecl install redis
 docker run --rm -d -p 27017:27017 mongo
 ```
 
+### Redis Cluster
+
+```shell
+php -m | grep -i redis > /dev/null || pecl install redis
+docker run --rm -d -p 7000-7005:7000-7005 grokzen/redis-cluster:7.0.10
+```
+
+## PHP7.4
+
 ```shell
 ulimit -n 65536
-IS_REDIS_CLUSTER_ENABLED=0 /usr/local/opt/php@7.4/bin/php -d apc.enable_cli=1 -d memory_limit=512M ./vendor/bin/phpunit
+IS_REDIS_CLUSTER_ENABLED=0 /usr/local/opt/php@8.0/bin/php -d apc.enable_cli=1 -d memory_limit=512M ./vendor/bin/phpunit
+```
+
+## PHP8.0
+
+```shell
+ulimit -n 65536
+IS_REDIS_CLUSTER_ENABLED=0 /usr/local/opt/php@8.0/bin/php -d apc.enable_cli=1 -d memory_limit=512M ./vendor/bin/phpunit
 ```
 
 In case of

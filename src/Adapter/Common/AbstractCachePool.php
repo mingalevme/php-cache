@@ -445,7 +445,7 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
      *
      * @return $this
      */
-    protected function preRemoveItem($key): self
+    protected function preRemoveItem($key): static
     {
         $item = $this->getItem($key);
         $this->removeTagEntries($item);
@@ -477,7 +477,7 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): mixed
     {
         $item = $this->getItem($key);
         if (!$item->isHit()) {

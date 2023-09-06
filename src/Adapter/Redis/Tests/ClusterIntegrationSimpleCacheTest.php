@@ -16,4 +16,12 @@ use Tests\Cache\SimpleCacheTest as BaseTest;
 class ClusterIntegrationSimpleCacheTest extends BaseTest
 {
     use CreateRedisClusterPoolTrait;
+
+    /**
+     * @dataProvider invalidArrayKeys
+     */
+    public function testDeleteMultipleInvalidKeys($key)
+    {
+        parent::testDeleteMultipleInvalidKeys($key);
+    }
 }
