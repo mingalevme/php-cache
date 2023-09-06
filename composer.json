@@ -1,5 +1,5 @@
 {
-    "name": "cache/cache",
+    "name": "mingalevme/cache",
     "description": "Library of all the php-cache adapters",
     "license": "MIT",
     "type": "library",
