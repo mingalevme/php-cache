@@ -16,9 +16,4 @@ use Tests\Cache\HierarchicalCachePoolTest;
 class IntegrationHierarchyTest extends HierarchicalCachePoolTest
 {
     use CreatePoolTrait;
-
-    public function testBasicUsage()
-    {
-        parent::testBasicUsage();
-    }
 }

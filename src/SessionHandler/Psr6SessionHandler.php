@@ -62,8 +62,7 @@ class Psr6SessionHandler extends AbstractSessionHandler
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
-    public function updateTimestamp($sessionId, $data)
+    #[ReturnTypeWillChange] public function updateTimestamp($sessionId, $data)
     {
         $item = $this->getCacheItem($sessionId);
         $item->expiresAt(\DateTime::createFromFormat('U', strval(\time() + $this->ttl)));

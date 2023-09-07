@@ -11,9 +11,10 @@
 
 namespace Cache\Namespaced\Tests;
 
-use Cache\Adapter\PHPArray\ArrayCachePool;
+use Cache\Adapter\Memcached\MemcachedCachePool;
 use Cache\Hierarchy\HierarchicalPoolInterface;
 use Cache\Namespaced\NamespacedCachePool;
+use Memcached;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -29,9 +30,10 @@ class IntegrationTest extends TestCase
 
     protected function setUp(): void
     {
-        $cache = new ArrayCachePool();
+        $cache = new Memcached();
+        $cache->addServer('localhost', 11211);
 
-        $this->cache = $cache;
+        $this->cache = new MemcachedCachePool($cache);
     }
 
     protected function tearDown(): void
@@ -44,7 +46,7 @@ class IntegrationTest extends TestCase
     public function testGetItem()
     {
         $namespace = 'ns';
-        $nsPool = new NamespacedCachePool($this->cache, $namespace);
+        $nsPool    = new NamespacedCachePool($this->cache, $namespace);
 
         $item = $nsPool->getItem('key');
         $this->assertEquals("|$namespace|key", $item->getKey());
@@ -53,7 +55,7 @@ class IntegrationTest extends TestCase
     public function testGetItems()
     {
         $namespace = 'ns';
-        $nsPool = new NamespacedCachePool($this->cache, $namespace);
+        $nsPool    = new NamespacedCachePool($this->cache, $namespace);
 
         $items = $nsPool->getItems(['key0', 'key1']);
 
@@ -69,7 +71,7 @@ class IntegrationTest extends TestCase
     public function testSave()
     {
         $namespace = 'ns';
-        $nsPool = new NamespacedCachePool($this->cache, $namespace);
+        $nsPool    = new NamespacedCachePool($this->cache, $namespace);
 
         $item = $nsPool->getItem('key');
         $item->set('foo');
@@ -82,7 +84,7 @@ class IntegrationTest extends TestCase
     public function testSaveDeferred()
     {
         $namespace = 'ns';
-        $nsPool = new NamespacedCachePool($this->cache, $namespace);
+        $nsPool    = new NamespacedCachePool($this->cache, $namespace);
 
         $item = $nsPool->getItem('key');
         $item->set('foo');

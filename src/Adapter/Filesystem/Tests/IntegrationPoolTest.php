@@ -11,9 +11,9 @@
 
 namespace Cache\Adapter\Filesystem\Tests;
 
-use Tests\Cache\CachePoolTest as BaseTest;
+use Cache\IntegrationTests\CachePoolTest;
 
-class IntegrationPoolTest extends BaseTest
+class IntegrationPoolTest extends CachePoolTest
 {
     use CreatePoolTrait;
 

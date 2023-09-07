@@ -61,8 +61,7 @@ class Psr16SessionHandler extends AbstractSessionHandler
     /**
      * {@inheritdoc}
      */
-    #[ReturnTypeWillChange]
-    public function updateTimestamp($sessionId, $data)
+    #[ReturnTypeWillChange] public function updateTimestamp($sessionId, $data)
     {
         $value = $this->cache->get($this->prefix.$sessionId);
 

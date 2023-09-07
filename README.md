@@ -6,48 +6,6 @@ https://github.com/php-cache/cache with:
 - psr/cache: "^1.0 || ^2.0 || ^3.0"
 - league/flysystem: "^2.0 || ^3.0"
 
-# Testing
-
-### APCu
-
-```shell
-pecl install apcu
-```
-
-### Memcached
-
-```shell
-brew install zlib
-brew install libmemcached
-pecl install memcached
-docker run --rm -d -p 11211:11211 memcached:alpine
-```
-
-### MongoDB
-
-```shell
-pecl install mongodb
-docker run --rm -d -p 27017:27017 mongo
-```
-
-### Redis
-
-```shell
-pecl install redis
-docker run --rm -d -p 27017:27017 mongo
-```
-
-```shell
-ulimit -n 65536
-IS_REDIS_CLUSTER_ENABLED=0 /usr/local/opt/php@7.4/bin/php -d apc.enable_cli=1 -d memory_limit=512M ./vendor/bin/phpunit
-```
-
-In case of
-`Warning: include(some.php): failed to open stream: Too many open files in .../php-cache/vendor/composer/ClassLoader.php on line XXX`
-run
-`ulimit -n 65536`
-before the script.
-
 # PHP Cache
 
 [![Gitter](https://badges.gitter.im/php-cache/cache.svg)](https://gitter.im/php-cache/cache?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)

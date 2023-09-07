@@ -11,7 +11,7 @@
 
 namespace Cache\Adapter\Filesystem\Tests;
 
-use Tests\Cache\TaggableCachePoolTest;
+use Cache\IntegrationTests\TaggableCachePoolTest;
 
 class IntegrationTagTest extends TaggableCachePoolTest
 {

@@ -34,18 +34,6 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
     private $logger;
 
     /**
-     * @type mixed
-     */
-    private $defaultLogLevel = 'alert';
-
-    /**
-     * @var array<string, mixed>
-     */
-    protected array $exceptionToLogLevelMap = [
-        InvalidArgumentException::class => 'warning',
-    ];
-
-    /**
      * @type PhpCacheItem[] deferred
      */
     protected $deferred = [];
@@ -318,50 +306,6 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
     }
 
     /**
-     * @param array<string, mixed> $map
-     */
-    public function setExceptionToLogLevelMap(array $map, bool $merge = true): void
-    {
-        if ($merge) {
-            $this->exceptionToLogLevelMap = array_merge($this->exceptionToLogLevelMap, $map);
-        } else {
-            $this->exceptionToLogLevelMap = $map;
-        }
-    }
-
-    /**
-     * @param mixed $level
-     */
-    public function setDefaultLogLevel($level): void
-    {
-        $this->defaultLogLevel = $level;
-    }
-
-    protected function getDefaultLogLevel()
-    {
-        return $this->defaultLogLevel;
-    }
-
-    /**
-     * @param \Exception $e
-     * @return mixed
-     */
-    protected function resolveLogLevel(\Exception $e)
-    {
-        if (!empty($this->exceptionToLogLevelMap[get_class($e)])) {
-            return $this->exceptionToLogLevelMap[get_class($e)];
-        }
-
-        return $this->getDefaultLogLevel();
-    }
-
-    protected function logException(\Exception $e): void
-    {
-        $level = $this->resolveLogLevel($e);
-        $this->log($level, $e->getMessage(), ['exception' => $e]);
-    }
-
-    /**
      * Logs with an arbitrary level if the logger exists.
      *
      * @param mixed  $level
@@ -385,8 +329,12 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
      */
     private function handleException(\Exception $e, $function)
     {
-        $this->logException($e);
+        $level = 'alert';
+        if ($e instanceof InvalidArgumentException) {
+            $level = 'warning';
+        }
 
+        $this->log($level, $e->getMessage(), ['exception' => $e]);
         if (!$e instanceof CacheException) {
             $e = new CachePoolException(sprintf('Exception thrown when executing "%s". ', $function), 0, $e);
         }
@@ -445,7 +393,7 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
      *
      * @return $this
      */
-    protected function preRemoveItem($key): self
+    protected function preRemoveItem($key): static
     {
         $item = $this->getItem($key);
         $this->removeTagEntries($item);
@@ -477,7 +425,7 @@ abstract class AbstractCachePool implements PhpCachePool, LoggerAwareInterface, 
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): mixed
     {
         $item = $this->getItem($key);
         if (!$item->isHit()) {

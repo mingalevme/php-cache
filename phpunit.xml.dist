@@ -10,10 +10,5 @@
     <env name="MONGODB_HOST" value="localhost:27017"/>
     <env name="MONGODB_COLLECTION" value="psr6test.cache"/>
     <env name="MONGODB_DATABASE" value="test"/>
-    <env name="MEMCACHED_HOST" value="localhost"/>
-    <env name="MEMCACHED_PORT" value="11211"/>
-    <env name="REDIS_HOST" value="127.0.0.1"/>
-    <env name="REDIS_PORT" value="6379"/>
-    <env name="IS_REDIS_CLUSTER_ENABLED" value="1"/>
   </php>
 </phpunit>

@@ -12,30 +12,26 @@
 namespace Cache\Adapter\Memcached\Tests;
 
 use Cache\Adapter\Memcached\MemcachedCachePool;
-use Memcached;
 
 trait CreatePoolTrait
 {
-    private ?Memcached $client = null;
+    private $client = null;
 
-    public function createCachePool(): MemcachedCachePool
+    public function createCachePool()
     {
         return new MemcachedCachePool($this->getClient());
     }
 
-    public function createSimpleCache(): MemcachedCachePool
+    public function createSimpleCache()
     {
         return $this->createCachePool();
     }
 
-    private function getClient(): Memcached
+    private function getClient()
     {
         if ($this->client === null) {
-            $this->client = new Memcached();
-            $this->client->addServer(
-                getenv('MEMCACHED_HOST') ?: 'localhost',
-                intval(getenv('MEMCACHED_HOST')) ?: 11211
-            );
+            $this->client = new \Memcached();
+            $this->client->addServer('localhost', 11211);
         }
 
         return $this->client;
